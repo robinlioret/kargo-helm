@@ -37,5 +37,5 @@ podAnnotations: {}
 resources: {}
 
 kargoStage:
-  enabled: false
+  enabled: true
   projectName: kargo-helm
