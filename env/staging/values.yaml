@@ -4,6 +4,6 @@ image:
 replicaCount: 1
 
 kargoStage:
-  name: dev
+  name: staging
   previousStages:
     - dev
