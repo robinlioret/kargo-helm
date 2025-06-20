@@ -4,6 +4,8 @@ kind: Stage
 metadata:
   name: {{ .Values.kargoStage.name }}
   namespace: {{ .Values.kargoStage.projectName }}
+  annotations:
+    kargo.akuity.io/color: {{ .Values.kargoStage.color | default "green" }}
 spec:
   requestedFreight:
     - origin:
