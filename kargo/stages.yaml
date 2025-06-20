@@ -2,7 +2,7 @@ apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
   name: dev
-  namespace: kargo-helm
+  namespace: kargo-helm-dev
   annotations:
     kargo.akuity.io/color: green
 spec:
@@ -28,7 +28,7 @@ apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
   name: staging
-  namespace: kargo-helm
+  namespace: kargo-helm-staging
   annotations:
     kargo.akuity.io/color: yellow
 spec:
@@ -55,7 +55,7 @@ apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
   name: prod
-  namespace: kargo-helm
+  namespace: kargo-helm-prod
   annotations:
     kargo.akuity.io/color: red
 spec:
