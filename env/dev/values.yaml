@@ -4,5 +4,7 @@ image:
 replicaCount: 1
 
 kargoStage:
+  enabled: true
+  projectName: kargo-helm
   name: dev
   direct: true
