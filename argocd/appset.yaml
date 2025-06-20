@@ -5,11 +5,11 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - git:
-      repoURL: https://github.com/robinlioret/kargo-helm.git
-      revision: HEAD
-      directories:
-      - path: env/*
+    - git:
+        repoURL: https://github.com/robinlioret/kargo-helm.git
+        revision: HEAD
+        directories:
+          - path: env/*
   template:
     metadata:
       name: kargo-helm-{{path.basename}}
@@ -18,12 +18,12 @@ spec:
     spec:
       destination:
         namespace: kargo-helm-{{path.basename}}
-        name: demo
+        server: https://kubernetes.default.svc
       project: kargo-helm
       source:
         path: charts/guestbook
         repoURL: https://github.com/robinlioret/kargo-helm.git
         helm:
           valueFiles:
-          - "/env/{{path.basename}}/values.yaml"
-          - "/env/{{path.basename}}/feature-flags.yaml"
+            - "/env/{{path.basename}}/values.yaml"
+            - "/env/{{path.basename}}/feature-flags.yaml"

@@ -8,7 +8,6 @@ spec:
     - image:
         repoURL: registry.sandbox.local/guestbook
         imageSelectionStrategy: SemVer
-
 ---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Warehouse
