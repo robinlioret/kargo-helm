@@ -38,3 +38,4 @@ resources: {}
 
 kargoStage:
   enabled: false
+  projectName: kargo-helm

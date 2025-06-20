@@ -2,18 +2,20 @@
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
-  name: prod
-  namespace: kargo-helm
-  annotations:
-    kargo.akuity.io/color: red
+  name: {{ .Values.kargoStage.name }}
+  namespace: {{ .Values.kargoStage.projectName }}
 spec:
   requestedFreight:
     - origin:
         kind: Warehouse
         name: guestbook
       sources:
-        stages:
-          - staging
+        {{- with .Values.kargoStage.previousStages }}
+        stages: {{ . }}
+        {{- end }}
+        {{- with .Values.kargoStage.direct }}
+        direct: {{ . }}
+        {{- end }}
   promotionTemplate:
     spec:
       steps:
@@ -21,7 +23,7 @@ spec:
             name: promote
           vars:
             - name: envPath
-              value: env/prod
+              value: env/{{ .Values.kargoStage.name }}
             - name: argocdApp
-              value: kargo-helm-prod
+              value: kargo-helm-{{ .Values.kargoStage.name }}
 {{- end }}
