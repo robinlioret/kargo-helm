@@ -1,5 +1,5 @@
 image:
-  tag: v0.0.90
+  tag: v0.0.91
 
 replicaCount: 2
 
