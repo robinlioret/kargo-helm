@@ -1,0 +1,10 @@
+image:
+  tag: v0.0.89
+
+replicaCount: 2
+
+kargoStage:
+  name: prod
+  color: red
+  previousStages:
+    - staging

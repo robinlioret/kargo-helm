@@ -3,6 +3,8 @@ kind: Stage
 metadata:
   name: prod
   namespace: kargo-helm
+  labels:
+    environment: prod
   annotations:
     kargo.akuity.io/color: red
 spec:
