@@ -10,3 +10,6 @@ spec:
     - stageSelector:
         name: staging
       autoPromotionEnabled: true
+    - stageSelector:
+        name: "glob:prod-*"
+      autoPromotionEnabled: true
