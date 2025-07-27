@@ -14,7 +14,7 @@ spec:
         name: guestbook
       sources:
         stages:
-          - staging
+          - prod-ready
   promotionTemplate:
     spec:
       steps:
