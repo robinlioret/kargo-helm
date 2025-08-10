@@ -1,4 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: kargo-helm
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  destinations:
+    - name: "*"
+      namespace: kargo-helm*
+      server: "*"
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  sourceRepos:
+    - https://github.com/robinlioret/kargo-helm.git
+---
+apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: kargo-helm

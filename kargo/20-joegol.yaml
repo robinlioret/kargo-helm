@@ -1,7 +1,22 @@
 apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: dev-joegol-guestbook
+  namespace: kargo-helm
+spec:
+  subscriptions:
+    - git:
+        branch: joegol
+        commitSelectionStrategy: NewestFromBranch
+        discoveryLimit: 20
+        repoURL: https://github.com/robinlioret/kargo-helm.git
+        includePaths:
+          - base/feature-flags.yaml
+---
+apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
-  name: dev-roblio-1
+  name: dev-joegol-guestbook
   namespace: kargo-helm
   labels:
     environment: prod
@@ -25,4 +40,4 @@ spec:
             - name: envPath
               value: env/prod
             - name: argocdApp
-              value: kargo-helm-dev-roblio-1
+              value: kargo-helm-dev-joegol-guestbook

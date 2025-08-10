@@ -1,3 +1,30 @@
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Project
+metadata:
+  name: kargo-helm
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: ProjectConfig
+metadata:
+  name: kargo-helm
+  namespace: kargo-helm
+  annotations:
+    # This annotation ensures Projects (Namespaces) are created first when deployed via Argo CD
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  promotionPolicies:
+    - stageSelector:
+        name: dev
+      autoPromotionEnabled: true
+    - stageSelector:
+        name: staging
+      autoPromotionEnabled: true
+    - stageSelector:
+        matchLabels:
+          environment: prod
+      autoPromotionEnabled: true
+---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: PromotionTask
 metadata:
@@ -46,3 +73,21 @@ spec:
       config:
         apps:
           - name: ${{ vars.argocdApp }}
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: guestbook
+  namespace: kargo-helm
+spec:
+  subscriptions:
+    - image:
+        repoURL: registry.sandbox.local/guestbook
+        imageSelectionStrategy: SemVer
+    - git:
+        branch: main
+        commitSelectionStrategy: NewestFromBranch
+        discoveryLimit: 20
+        repoURL: https://github.com/robinlioret/kargo-helm.git
+        includePaths:
+          - base/feature-flags.yaml
