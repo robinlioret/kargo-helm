@@ -1,5 +1,20 @@
 {{- if .Values.kargoStage.enabled }}
 apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: {{ .Values.kargoStage.name }}
+  namespace: {{ .Values.kargoStage.projectName }}
+spec:
+  subscriptions:
+    - git:
+        branch: {{ .Values.kargoStage.branchName }}
+        commitSelectionStrategy: NewestFromBranch
+        discoveryLimit: 20
+        repoURL: https://github.com/robinlioret/kargo-helm.git
+        includePaths:
+          - base/feature-flags.yaml
+---
+apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
   name: {{ .Values.kargoStage.name }}

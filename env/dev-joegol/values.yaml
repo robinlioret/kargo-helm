@@ -4,5 +4,5 @@ image:
 replicaCount: 1
 
 kargoStage:
-  name: dev
+  name: dev-joegol
   direct: true
